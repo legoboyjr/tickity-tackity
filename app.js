@@ -1,22 +1,11 @@
 //veriables
 const board = document.querySelector('.board');
-const cells = board.querySelectorAll('.cell');
 const turnDisplay = document.querySelector('.turn span');
 const controls = document.querySelector('.controls');
 const resetBtn = controls.querySelector('button');
 let currentPlayer = 'X';
 let gameOver = false;
-let grid = [
-    Cell(`<div class="cell h30 w30 bl-none bt-none"></div>`), 
-    Cell(`<div class="cell h30 w30 bt-none"></div>`), 
-    Cell(`<div class="cell h30 w30 bt-none br-none"></div>`),
-    Cell(`<div class="cell h30 w30 bl-none"></div>`), 
-    Cell(`<div class="cell h30 w30"></div>`), 
-    Cell(`<div class="cell h30 w30 br-none"></div>`),
-    Cell(`<div class="cell h30 w30 bl-none bb-none"></div>`), 
-    Cell(`<div class="cell h30 w30 bb-none"></div>`),
-    Cell(`<div class="cell h30 w30 bb-none br-none"></div>`)
-];
+let grid = makeGrid();
 
 function Cell(template){
     const data = {
@@ -28,9 +17,7 @@ function Cell(template){
 
 
 //events 
-cells.forEach(function addEventListener(Cell){
-    Cell.addEventListener('click', onCellClick);
-});
+board.addEventListener('click', onCellClick);
 resetBtn.addEventListener('click', reset);
 //functions
 function onCellClick(event) {
@@ -46,11 +33,23 @@ function onCellClick(event) {
 
 function reset(event) {
     currentPlayer = 'X';
-    cells.forEach(function resetCell(cell){
-        delete cell.beenClicked;
-        cell.textContent = '';
-    });
     renderTurn();
+    grid = makeGrid();
+    render();
+}
+
+function makeGrid(){
+    return [
+        Cell(`<div class="cell h30 w30 bl-none bt-none"></div>`), 
+        Cell(`<div class="cell h30 w30 bt-none"></div>`), 
+        Cell(`<div class="cell h30 w30 bt-none br-none"></div>`),
+        Cell(`<div class="cell h30 w30 bl-none"></div>`), 
+        Cell(`<div class="cell h30 w30"></div>`), 
+        Cell(`<div class="cell h30 w30 br-none"></div>`),
+        Cell(`<div class="cell h30 w30 bl-none bb-none"></div>`), 
+        Cell(`<div class="cell h30 w30 bb-none"></div>`),
+        Cell(`<div class="cell h30 w30 bb-none br-none"></div>`)
+    ];
 }
 
 function renderTurn(){
@@ -66,3 +65,4 @@ function render() {
 //kick it off
 
 renderTurn();
+render();
