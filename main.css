@@ -35,6 +35,14 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex: 1 1 auto;
+}
+
+.align-content-start{
+    align-content: flex-start;
+}
+.flex-wrap{
+    flex-wrap: wrap;
 }
 .btn{}
 
