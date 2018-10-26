@@ -3,10 +3,13 @@
     padding: 0;
     box-sizing: border-box;
     font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body{
-
+ background-image: url("Colorful-Abstract-Backgrounds.jpg");
+ background-repeat: no-repeat;
+ background-size: cover;
 }
 .container{
     width: 100vw;
@@ -30,7 +33,9 @@ body{
 .row{
 }
 .cell{
-    border: 1px solid black;
+    border: 2px solid rgb(63, 63, 63);
+    text-shadow: 4px 4px white;
+    opacity: .5%;
     font-size: 6rem;
     display: flex;
     justify-content: center;
@@ -44,14 +49,23 @@ body{
 .flex-wrap{
     flex-wrap: wrap;
 }
-.btn{}
+.btn{
+    background-color:grey;
+    border: none;
+    color: black;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
 
 .h100 {
     height: 100%;
 }
 
 .h90 {
-    height: 90%;
+    height: 82%;
 }
 
 .w100{
@@ -101,4 +115,19 @@ body{
 }
 .bt-none{
     border-top: none;
+}
+
+.colorblue{
+    color: black;
+    opacity: .7;
+    text-shadow: 2px 2px white;
+}
+.colorwhite{    
+    color: white};
+}
+
+
+
+.backgroundcolor{
+    background-color: white;
 }
