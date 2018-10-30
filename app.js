@@ -5,7 +5,19 @@ const controls = document.querySelector('.controls');
 const resetBtn = controls.querySelector('button');
 let currentPlayer = 'X';
 let gameOver = false;
+let moveCount = 0;
 let grid = makeGrid();
+const wins = [
+    [0,4,8],
+    [0,3,6],
+    [0,1,2],
+    [1,4,7],
+    [2,5,8],
+    [2,4,6],
+    [3,4,5],
+    [6,7,8]
+];
+
 
 function Cell(template){
     const data = {
@@ -34,13 +46,42 @@ function onCellClick(event) {
     }
     cell.hasBeenClicked = true;
     cell.textContent = currentPlayer;
-    currentPlayer = currentPlayer === 'X' ? 'O': 'X';
+    //implement movecount
+    moveCount += 1;
+    //check for win
+    gameOver = checkForWin();
+    //switch player
+    if(!gameOver){
+        (currentPlayer = currentPlayer === 'X' ? 'O': 'X')
+    }
+    //render
     renderTurn();
     render();
 }
 
+function checkForWin() {
+    for(let i = 0; i< wins.length; i += 1){
+        const combo = wins[i];
+        const selection = combo.map(function getGridCell(n){
+            return grid[n].textContent;
+        });
+        const allTheSame = selection.every(function sameAsCurrentPlayer(char){
+            return char === currentPlayer;
+        })
+        if(allTheSame){
+            return true;
+        }
+    }
+    if(moveCount >= 9){
+        return true;
+    }
+    return false;
+}
+
 function reset(event) {
     currentPlayer = 'X';
+    moveCount = 0;
+    gameOver = false;
     renderTurn();
     grid = makeGrid();
     render();
@@ -65,11 +106,18 @@ function renderTurn(){
 }
 
 function render() {
-    board.innerHTML = grid.map(function(element) {
+                board.innerHTML = grid.map(function(element) {
         const [first,last] = element.template.split('><');
         const html = `${first}>${element.textContent}<${last}`;
         return html;
     }).join('\n');
+
+    if(gameOver){
+        if(moveCount >= 9){
+            return alert (`Cat takes the board`);
+        }
+        alert(`${currentPlayer} Wins!!!`);
+    }
 }
 
 //kick it off
